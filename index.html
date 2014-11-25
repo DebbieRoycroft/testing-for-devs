@@ -1,1 +1,271 @@
-Test Page
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Testing for Developers</title>
+
+		<meta name="description" content="(Java) tools and techniques for developers to test code">
+		<meta name="author" content="Debbie Roycroft">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="reveal.js/css/reveal.min.css">
+		<link rel="stylesheet" href="reveal.js/css/theme/beige.css" id="theme">
+                <link rel="stylesheet" href="css/textcolours.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="reveal.js/lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'reveal.js/css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="reveal.js/lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					<h1>Testing for Developers</h1>
+					<p>
+						<small>Presentation by Debbie Roycroft 
+                                                <a href="http://twitter.com/DebbieRoycroft">@DebbieRoycroft</a></small>
+					</p>
+				</section>
+                            <section>
+                                <h1>DON'T PANIC!</h1>
+                                <p class="fragment roll-in">There will be real (Java) code examples</p>
+                                <p class="fragment roll-in">Most concepts here relate to other languages too</p>
+                            </section>
+                            <section>
+                                <h2>But I'm a developer- why do I need to know about testing?</h2>
+                                <ul>
+                                    <li class="fragment roll-in">The sooner bugs are found the cheaper they are to fix</li>
+                                    <li class="fragment roll-in">Stop faults recurring</li>
+                                    <li class="fragment roll-in">Make sure your code does what the customer wants</li>
+                                    <li class="fragment roll-in">Boundaries between developer and QA are more blurred</li>
+                                </ul>
+                            </section>
+                            <section>
+                                <h2>So what testing do I need to do?</h2>
+                                <ul>
+                                    <li>Many different kinds of testing </li>
+                                    <li>Lots of different tools and frameworks</li>
+                                    <li>Not all will suit all projects/teams </li>
+                                    <li>Pick what works for you</li>
+                                </ul>
+                            </section>
+                            <section>
+                                <h1>Manual Testing</h1>
+                                <ul>
+                                    <li class="fragment roll-in">Code review</li>
+                                    <li class="fragment roll-in">Running by hand and checking it does what it should</li>
+                                    <li class="fragment roll-in">Time-consuming if you need to do it more than once</li>
+                                    <li class="fragment roll-in">May not pick up knock-on effects in complex systems</li>
+                                    <li class="fragment roll-in">Maybe we should look at automated testing...</li>
+                                </ul>
+                            </section>
+                            <section>
+                                <section>
+                                <h1>Static Checking</h1>
+                                <ul>
+                                    <li class="fragment roll-in">Analyse code for errors or code standards violations</li>
+                                    <li class="fragment roll-in">Done without running the code</li>
+                                    <li class="fragment roll-in">Catch well-known gotchas</li>
+                                    <li class="fragment roll-in">Helps keep code consistent and readable</li>
+                                    <li class="fragment roll-in">Won't make sure your code works to spec</li>
+                                </ul>
+                                </section>
+                                <section>
+                                    <h2>Static Checking Tools</h2>
+                                    <ul>
+                                        <li>IDE 
+                                            <aside class="notes">
+						Different IDEs provide different static checking.  At the moment NetBeans and IntelliJ seem most comprehensive in standard installation
+                                                But plugins like PMD, CheckStyle and FindBugs can extend Eclipse basic checks
+                                            </aside>
+                                            <ul>
+                                                <li> <a href="https://www.jetbrains.com/idea/">IntelliJ</a></li>
+                                                <li> <a href="https://netbeans.org/">NetBeans</a></li>
+                                                <li> <a href="https://eclipse.org/">Eclipse</a></li>
+                                            </ul>
+                                        <aside class="notes">
+                                            There is some overlap between these: CheckStyle is mostly for coding standards, but can cover some bugs e.g. missing translations in properties files
+                                            PMD is mostly about best practise (so some style, some bug checks)
+                                            FindBugs is mostly for detecting coding patterns that give rise to bugs 
+                                        </aside>
+                                        <li><a href="http://checkstyle.sourceforge.net/">CheckStyle</a></li>
+                                        <li><a href="http://pmd.sourceforge.net/">PMD</a></li>
+                                        <li><a href="http://findbugs.sourceforge.net/">FindBugs</a></li>
+                                    </ul>
+                                </section>
+                            </section>
+                            <section>
+                                <section>
+                                <h1>Unit Testing</h1>
+                                    <ul>
+                                        <li class='fragment roll-in'>Exercise small section of code</li>
+                                        <li class="fragment roll-in">Fast to run</li>
+                                        <li class="fragment roll-in">Gives us confidence to refactor code</li>
+                                        <li class='fragment roll-in'>To TDD or not TDD</li>
+                                    </ul>
+                                </section>
+                                <section>
+                                    <h2>Writing easy to test code</h2>
+                                    <ul>     
+                                        <li class='fragment roll-in'>Beware of singletons/global data</li>
+                                        <li class='fragment roll-in'>Design code with dependency injection</li>
+                                        <li class='fragment roll-in'>Code with small functions, single responsibility</li>
+                                    </ul>
+                                </section>
+                                <section>
+                                    <h2>Writing good tests</h2>
+                                    <ul>
+                                        <li class='fragment roll-in'>Each test is independent</li>
+                                        <li class='fragment roll-in'>Aim of each test should be clear</li>
+                                        <li class='fragment roll-in'>Treat unit test code like production code</li>
+                                        <li class='fragment roll-in'>Don't just exercise the 'happy path'</li>
+                                        <li class='fragment roll-in'>Cover edge cases</li>
+                                        <li class='fragment roll-in'>Cover exception conditions</li>
+                                        <li class='fragment roll-in'>Always use varied data</li>
+                                        <li class='fragment roll-in'>Test to the public interface</li>
+                                        <li class='fragment roll-in'>Don't be concerned with internals</li>
+                                        <li class='fragment roll-in'>Take care with mocks/dummies</li>
+                                    </ul>
+                                </section>
+                                <section>
+                                    <h2>Test Readability</h2>
+                                    <ul>
+                                        <li>Descriptive test names</li>
+                                        <li>Structure tests given/when/then</li>
+                                        <li><a href="http://hamcrest.org/">Hamcrest</a></li>
+                                    </ul>
+                                </section>
+                                <section>
+                                    <h2>Unit Testing Frameworks</h2>
+                                    <ul>
+                                        <li><a href="http://junit.org/">JUnit</a></li>  
+                                        <li><a href="http://testng.org/doc/index.html">TestNG</a></li>  
+                                    </ul>
+                                </section>
+                                <section>
+                                    <h2>Mocking</h2>
+                                    <ul>
+                                        <li><a href="https://code.google.com/p/mockito/">Mockito</a></li>
+                                        <li><a href="http://easymock.org/">EasyMock</a></li>
+                                        <li><a href="http://www.jmock.org/">JMock</a></li>
+                                        <li><a href="https://code.google.com/p/powermock/">PowerMock</a></li>
+                                    </ul>
+                            </section>
+                            </section>
+                            <section>
+                                <h1>Testing the Bigger Picture</h1>
+                            </section>
+                            <section>
+                                <h2>Integration Testing</h2>
+                                <p>Slower to run</p>
+                                <p>Use real objects not mocks</p>
+                                <ul>
+                                    <li><a href="http://testng.org/doc/index.html">TestNG</a></li>   
+                                    <li><a href="http://www.soapui.org/">SOAPUI</a></li>
+                                    <li><a href="http://jmeter.apache.org/">JMeter</a></li>
+                                </ul>
+                            </section>
+                            <section>
+                                <h1>Acceptance Tests</h1>
+                                <h2>Making sure code meets the specification (BDD)</h2>
+                                <ul>
+                                    <li><a href="http://cukes.info/">Cucumber</a></li>
+                                    <li><a href="https://code.google.com/p/spock/">Spock</a></li>
+                                    <li><a href="http://jbehave.org/">JBehave</a></li>
+                                    <li><a href="http://concordion.org/">Concordion</a></li>
+                                    <li><a href="http://fitnesse.org/FitNesse">FitNesse</a></li>
+                                </ul>
+                            </section>
+                            <section>
+                                <section>
+                                    <h1>User Interface Testing</h1>
+                                    <ul>
+                                        <li>Can catch embarrassing errors</li>
+                                        <li>Often fragile, expensive to maintain</li>
+                                        <li>Tend to be slow</li>
+                                        <li>Hard to run in automated CI</li>
+                                    </ul>
+                                </section>
+                                <section>
+                                    <h2>GUI Testing Tools</h2>
+                                    <ul>
+                                        <li>Webdrivers e.g. <a href="http://www.seleniumhq.org/">Selenium</a></li>
+                                        <li>Swing tools e.g. <a href="http://docs.codehaus.org/display/FEST/Home">FEST-swing</a></li>
+                                        <li>JavaFX tools e.g <a href="https://github.com/TestFX/TestFX">TestFX</a></li>
+                                    </ul>
+                            </section>
+                            </section>                            
+                            <section>
+                                <h2>Code Coverage</h2>
+                                <h2>Performance Testing</h2>
+                                <h2>Stress Testing</h2>
+                                <h2>Load Testing</h2>
+                            </section>
+                            <section>
+                                <h3>Manchester Java Community</h3>
+                                <p><a href="http://twitter.com/mcrjava">@mcrjava</a></p>
+                                <p><a href="http://www.meetup.com/ManchesterUK-Java-Community/"> meetup group</a></p>
+                            </section>
+			</div>
+
+		</div>
+
+		<script src="reveal.js/lib/js/head.min.js"></script>
+		<script src="reveal.js/js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'reveal.js/lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'reveal.js/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
